@@ -1,0 +1,26 @@
+{
+  "name": "Project-Clock",
+  "version": "1.0.0",
+  "description": "A time-tracker for your projects",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=project-clock.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=project-clock.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Project Clock\"",
+    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=project-clock.png --prune=true --out=release-builds"
+  },
+  "author": "Richlab",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.5",
+    "electron-packager": "^12.2.0",
+    "electron-winstaller": "^2.7.0"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "nedb": "^1.8.0"
+  }
+}
