@@ -11,12 +11,14 @@
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=project-clock.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=project-clock.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Project Clock\"",
     "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=project-clock.png --prune=true --out=release-builds",
-    "create-installer-win": "node installers/windows/createinstaller.js"
+    "create-installer-win": "node installers/windows/createinstaller.js",
+    "create-installer-mac": "electron-installer-dmg ./release-builds/Project-Clock-darwin-x64/Project-Clock.app project-clock.app --out=release-builds --overwrite --icon=project-clock.icns"
   },
   "author": "Richlab",
   "license": "ISC",
   "devDependencies": {
     "electron": "^3.0.5",
+    "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^12.2.0",
     "electron-winstaller": "^2.7.0"
   },
