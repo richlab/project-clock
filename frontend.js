@@ -39,6 +39,14 @@ $(function() {
         }
     });
 
+    //submit on enter
+    $('#p_name').keydown(function(e){
+
+        if(e.keyCode === 13){
+            $('#add_p').click();
+        }
+    });
+
     //delete project
     $('#projects').on('click', '.p-del', function(){
 
