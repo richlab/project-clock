@@ -17,18 +17,7 @@ var timer;
 $(function() {
 
     //load projects
-    db.find({ }, function (err, docs) {
-
-        $.each(docs, function (i,v){
-            $('#projects').append(
-                '<div class="row">' +
-                    '<div class="cell" id="n_' + v._id + '">' + v.name + '<i class="fa fa-trash p-del"></i></div>' +
-                    '<div class="cell" id="t_' + v._id + '">' + v.time + '</div>' +
-                    '<div class="cell"><input type="checkbox" class="timer" id="'+ v._id +'">' + '</div>' +
-                '</div>'
-            );
-        });
-    });
+    loadProjects();
 
     //start/stop timer
     $('#projects').on('change', '.timer', function(){
@@ -46,7 +35,7 @@ $(function() {
 
         if ($('#p_name').val() !== ''){
             db.insert({ name: $('#p_name').val(), time: '00:00:00'});
-            window.location.reload();
+            loadProjects();
         }
     });
 
@@ -55,7 +44,7 @@ $(function() {
 
         if (confirm('Sure to delete ' + $(this).parent().text() + '?!')){
             db.remove({_id: $(this).parents('.row').find('.timer').attr('id')});
-            window.location.reload();
+            loadProjects();
         }
     });
 
@@ -65,6 +54,24 @@ $(function() {
 /*
 functions
  */
+
+function loadProjects(){
+
+    $('.project').remove();
+
+    db.find({ }, function (err, docs) {
+
+        $.each(docs, function (i,v){
+            $('#projects').append(
+                '<div class="row project">' +
+                '<div class="cell" id="n_' + v._id + '">' + v.name + '<i class="fa fa-trash p-del"></i></div>' +
+                '<div class="cell" id="t_' + v._id + '">' + v.time + '</div>' +
+                '<div class="cell"><input type="checkbox" class="timer" id="'+ v._id +'">' + '</div>' +
+                '</div>'
+            );
+        });
+    });
+}
 
 function runClock(p_id){
 
