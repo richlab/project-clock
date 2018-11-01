@@ -1,7 +1,7 @@
 # Project Clock
 A time-tracker for your projects
 
-<img src="https://richlab.de/pics/project-clock-screenshot_small.png">
+<img src="https://richlab.de/pics/project-clock-shot.png">
 
 Done with <a href="https://electronjs.org/" target="_blank">Electron</a>
 
