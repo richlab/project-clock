@@ -12,7 +12,7 @@
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=project-clock.ico --prune=true --out=release-builds --version-string.CompanyName=Richlab --version-string.FileDescription=2.0.0 --version-string.ProductName=\"Project Clock\"",
     "package-linux": "electron-packager .  project-clock --overwrite --asar=true --platform=linux --arch=x64 --icon=project-clock.png --prune=true --out=release-builds",
     "create-installer-win": "node installers/windows/createinstaller.js",
-    "create-installer-mac": "electron-installer-dmg ./release-builds/Project-Clock-darwin-x64/Project-Clock.app project-clock.app --out=release-builds --overwrite --icon=project-clock.icns",
+    "create-installer-mac": "electron-installer-dmg ./release-builds/Project-Clock-darwin-x64/Project-Clock.app project-clock-installer --out=release-builds --overwrite --icon=project-clock.icns",
     "create-installer-debian": "electron-installer-debian --src release-builds/Project-Clock-linux-x64/ --arch amd64 --config debian.json"
   },
   "author": "Richlab",

@@ -1,4 +1,4 @@
-# Project Clock
+# Project-Clock
 A time-tracker for your projects
 
 <img src="https://richlab.de/pics/project-clock-screen.png" width="400">
@@ -10,7 +10,7 @@ Download builds for
 <ul>
     <li>Mac OS
         <ul>
-            <li><a href="https://www.richlab.de/files/project-clock.app.dmg">Vs. 2.0.0</a> (dmg installer)</li>
+            <li><a href="https://www.richlab.de/files/project-clock-installer.dmg">Vs. 2.0.0</a> (dmg installer)</li>
         </ul>
     </li>
     <li>Windows

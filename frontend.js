@@ -11,6 +11,10 @@ if (! fs.existsSync(dbPath)){
 var Datastore = require('nedb');
 var db = new Datastore({ filename: dbPath, autoload: true });
 
+const electron = require('electron');
+const appPath = electron.remote.app.getAppPath();
+const dock = electron.remote.app.dock;
+
 
 $(function() {
 
@@ -75,18 +79,25 @@ function loadProjects(){
         $.each(docs, function (i,v){
 
             var running = '';
+            var checked = '';
             if (window.$['timer' + v._id] !== undefined){
-                running = ' checked';
+                checked = ' checked';
+                running = ' running';
             }
 
             $('#projects').append(
                 '<div class="row project">' +
                 '<div class="cell" id="n_' + v._id + '">' + v.name + '<i class="fa fa-trash p-del"></i></div>' +
-                '<div class="cell" id="t_' + v._id + '">' + v.time + '</div>' +
-                '<div class="cell"><input type="checkbox" class="timer" id="'+ v._id +'"' + running + '>' + '</div>' +
+                '<div class="cell time ' + running + '" id="t_' + v._id + '">' + v.time + '</div>' +
+                '<div class="cell"><input type="checkbox" class="timer" id="'+ v._id +'"' + checked + '>' + '</div>' +
                 '</div>'
             );
         });
+
+        if (! $('#projects').find('input[type="checkbox"]').is(':checked')){
+
+            dock.setIcon(appPath + '/project-clock.png');
+        }
     });
 }
 
@@ -99,6 +110,9 @@ function runClock(p_id){
         startTimer(parseInt(time_arr[0]), parseInt(time_arr[1]), parseInt(time_arr[2]), p_id);
 
     });
+
+    $('#' + p_id).parents('.row').find('.time').addClass('running');
+    dock.setIcon(appPath + '/project-clock-running.png');
 }
 
 
@@ -106,6 +120,12 @@ function stopClock(p_id){
 
     clearTimeout(window.$['timer' + p_id]);
     window.$['timer' + p_id] = undefined;
+
+    $('#' + p_id).parents('.row').find('.time').removeClass('running');
+
+    if (! $('#projects').find('input[type="checkbox"]').is(':checked')){
+        dock.setIcon(appPath + '/project-clock.png');
+    }
 }
 
 

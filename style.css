@@ -33,7 +33,7 @@ body {
     background: #e9e9e9;
 }
 .row.header {
-    font-weight: 900;
+    font-weight: bold;
     color: #ffffff;
     background: #4b6992;
 }
@@ -55,9 +55,14 @@ body {
     cursor: pointer;
 }
 
+.running{
+    color:#c0392b;
+    font-weight:bold;
+}
+
 
 .form{
-    margin-left: 10px;
+    text-align: center;
 }
 
 input{
