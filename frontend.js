@@ -14,6 +14,8 @@ const db = new Datastore({ filename: dbPath, autoload: true });
 const electron = require('electron');
 const appPath = electron.remote.app.getAppPath();
 const dock = electron.remote.app.dock;
+let counter = 0;
+let blinking;
 
 
 $(function() {
@@ -93,11 +95,6 @@ function loadProjects(){
                 '</div>'
             );
         });
-
-        if (! clockRunning()){
-
-            dock.setIcon(appPath + '/project-clock.png');
-        }
     });
 }
 
@@ -112,7 +109,11 @@ function runClock(p_id){
     });
 
     $('#' + p_id).parents('.row').find('.time').addClass('running');
-    dock.setIcon(appPath + '/project-clock-running.png');
+
+    if (! counter){
+        counter = 1;
+        blinking = setInterval(clockBlink, 1000);
+    }
 }
 
 
@@ -122,11 +123,15 @@ function stopClock(p_id){
     window.$['timer' + p_id] = undefined;
 
     $('#' + p_id).parents('.row').find('.time').removeClass('running');
+    $('#' + p_id).parents('.row').find('.timer').prop('checked', false);
 
-    if (! clockRunning()){
+    if (! $('#projects').find('input[type="checkbox"]').is(':checked')){
 
+        clearInterval(blinking);
+        counter = 0;
         dock.setIcon(appPath + '/project-clock.png');
     }
+
 }
 
 
@@ -159,7 +164,15 @@ function addZero(i) {
     return i;
 }
 
-function clockRunning(){
 
-    return $('#projects').find('input[type="checkbox"]').is(':checked');
+function clockBlink(){
+
+    if (counter % 2 == 0){
+        dock.setIcon(appPath + '/project-clock-running.png');
+    }
+    else{
+        dock.setIcon(appPath + '/project-clock.png');
+    }
+
+    counter++;
 }
