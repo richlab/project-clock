@@ -15,8 +15,12 @@
     "create-installer-mac": "electron-installer-dmg ./release-builds/Project-Clock-darwin-x64/Project-Clock.app project-clock-installer --out=release-builds --overwrite --icon=project-clock.icns",
     "create-installer-debian": "electron-installer-debian --src release-builds/Project-Clock-linux-x64/ --arch amd64 --config debian.json"
   },
-  "author": "Richlab",
-  "license": "ISC",
+  "author": {
+    "name": "Richlab",
+    "email": "rp@richlab.de",
+    "url": "https://richlab.de"
+  },
+  "license": "MIT",
   "devDependencies": {
     "electron": "^3.0.5",
     "electron-installer-dmg": "^2.0.0",
@@ -24,6 +28,7 @@
     "electron-winstaller": "^2.7.0"
   },
   "dependencies": {
+    "about-window": "^1.12.1",
     "jquery": "^3.3.1",
     "nedb": "^1.8.0"
   }

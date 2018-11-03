@@ -1,15 +1,15 @@
-var dbFile = 'projects.json';
-var fs = require('fs');
-var home = require("os").homedir();
-var dbPath = home + '/' + dbFile;
+const dbFile = 'projects.json';
+const fs = require('fs');
+const home = require("os").homedir();
+const dbPath = home + '/' + dbFile;
 
 if (! fs.existsSync(dbPath)){
     try { fs.createWriteStream(dbPath) }
     catch(e) { alert('Failed to create db-file !'); }
 }
 
-var Datastore = require('nedb');
-var db = new Datastore({ filename: dbPath, autoload: true });
+const Datastore = require('nedb');
+const db = new Datastore({ filename: dbPath, autoload: true });
 
 const electron = require('electron');
 const appPath = electron.remote.app.getAppPath();
@@ -55,7 +55,7 @@ $(function() {
 
         if (confirm('Sure to delete ' + $(this).parent().text() + '?!')){
 
-            var p_id = $(this).parents('.row').find('.timer').attr('id');
+            let p_id = $(this).parents('.row').find('.timer').attr('id');
 
             stopClock(p_id);
             db.remove({_id: p_id});
@@ -78,8 +78,8 @@ function loadProjects(){
 
         $.each(docs, function (i,v){
 
-            var running = '';
-            var checked = '';
+            let running = '';
+            let checked = '';
             if (window.$['timer' + v._id] !== undefined){
                 checked = ' checked';
                 running = ' running';
@@ -94,7 +94,7 @@ function loadProjects(){
             );
         });
 
-        if (! $('#projects').find('input[type="checkbox"]').is(':checked')){
+        if (! clockRunning()){
 
             dock.setIcon(appPath + '/project-clock.png');
         }
@@ -106,7 +106,7 @@ function runClock(p_id){
 
     db.findOne({ _id: p_id}, function (err, proj) {
 
-        var time_arr = proj.time.split(':');
+        let time_arr = proj.time.split(':');
         startTimer(parseInt(time_arr[0]), parseInt(time_arr[1]), parseInt(time_arr[2]), p_id);
 
     });
@@ -123,7 +123,8 @@ function stopClock(p_id){
 
     $('#' + p_id).parents('.row').find('.time').removeClass('running');
 
-    if (! $('#projects').find('input[type="checkbox"]').is(':checked')){
+    if (! clockRunning()){
+
         dock.setIcon(appPath + '/project-clock.png');
     }
 }
@@ -142,7 +143,7 @@ function startTimer(h,m,s, p_id) {
         m = 0;
     }
 
-    var timeString = addZero(h) + ":" + addZero(m) + ":" + addZero(s);
+    let timeString = addZero(h) + ":" + addZero(m) + ":" + addZero(s);
 
     $('#t_' + p_id).html(timeString);
 
@@ -156,4 +157,9 @@ function addZero(i) {
 
     if (i < 10) {i = "0" + i};
     return i;
+}
+
+function clockRunning(){
+
+    return $('#projects').find('input[type="checkbox"]').is(':checked');
 }
