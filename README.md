@@ -27,3 +27,13 @@ Download builds for
         </ul>
     </li>
 </ul>
+
+Build scripts:
+<ul>
+    <li>npm run package-mac</li>
+    <li>npm run package-win</li>
+    <li>npm run package-linux</li>
+    <li>npm run create-installer-mac</li>
+    <li>npm run create-installer-win</li>
+    <li>npm run create-installer-debian</li>
+</ul>
