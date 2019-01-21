@@ -27,7 +27,7 @@ Download builds for
         </ul>
     </li>
 </ul>
-
+<br/>
 Build scripts:
 <ul>
     <li>npm run package-mac</li>
